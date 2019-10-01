@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">Search</h1>
+<section class="section">
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+        <div class="field">
+            {{ form.searchbox.label(class_="label") }}
+            {{ form.searchbox(size=32, class_="input is-link") }}
+        </div>
+        </p>
+
+        <p>{{ form.submit(class_="button is-link") }}</p>
+    </form>
+</section>
+
+{% if search_results %}
+
+<section class="section">
+    {% if search_results.meta.page.total_results == 0 %}
+    <div class="container">
+        Total results: {{ search_results.meta.page.total_results }} Query: {{ query }}
+    </div>
+    {% else %}
+    <div class="container">
+        Total results: {{ search_results.meta.page.total_results }} Query: {{ query }}
+        <hr>
+        <table class="table is-striped is-fullwidth">
+            <thead>
+            <tr>
+                <th><abbr title="Title">Title</abbr></th>
+                <th><abbr title="Genres">Genres</abbr></th>
+                <th><abbr title="Year">Year</abbr></th>
+                <th><abbr title="Cast">Cast</abbr></th>
+                <th><abbr title="Score">Score</abbr></th>
+            </tr>
+            </thead>
+            {% for document in search_results.results %}
+
+            <tr>
+                <td>
+                    {{ document.title.raw }}
+                </td>
+                <td>
+                    {{ document.genres.raw }}
+                </td>
+                <td>
+                    {{ document.year.raw }}
+                </td>
+                <td>
+                    {{ document.cast.raw }}
+                </td>
+                <td>
+                    {{ document._meta.score }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+    <div class="container">
+        </br>
+        {% if search_results.meta.page.total_pages > 1 %}
+        {% for n in range(search_results.meta.page.total_pages) %}
+        <a class="button" href="/search?page={{ n + 1}}&query={{ query }}">{{ n + 1}}</a>
+        {% endfor %}
+        {% endif %}
+    </div>
+</section>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">Posts</h1>
+<section class="section">
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+        <div class="field">
+            {{ form.searchbox.label(class_="label") }}
+            {{ form.searchbox(size=32, class_="input is-link") }}
+        </div>
+        </p>
+
+        <p>{{ form.submit(class_="button is-link") }}</p>
+    </form>
+</section>
+
+{% if search_results %}
+
+<section class="section">
+    {% if search_results.meta.page.total_results == 0 %}
+    <div class="container">
+        Total results: {{ search_results.meta.page.total_results }} Query: {{ query }}
+    </div>
+    {% else %}
+    <div class="container">
+        Total results: {{ search_results.meta.page.total_results }} Query: {{ query }}
+        <hr>
+
+        {% for document in search_results.results %}
+        <div class="box">
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong>{% if document.title.raw %} {{ document.title.raw }} {% else %} {{ document.title }} {% endif %}</strong> /
+                            <small>{% if document.author.raw %} {{ document.author.raw }} {% else %} {{ document.author }} {% endif %}</small> /
+                            <small>{% if document.date.raw %} {{ document.date.raw }} {% else %} {{ document.date }} {% endif %}</small>
+                            {% if document._meta %} / <small>{{ document._meta.score }}</small>{% endif %}
+                            <br>
+                            {% if document.content.raw %} {{ document.content.raw }} {% else %} {{ document.content }} {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</section>
+
+{% endif %}
+
+{% endblock %}
