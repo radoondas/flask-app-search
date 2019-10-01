@@ -12,7 +12,9 @@ Welcome to simple demo Python Flask application using Elasticsearch App Search t
 # How to
 
 ## Quickstart
-1. Clone the repository `git clone https://github.com/radoondas/flask-app-search.git`; navigate to the repository `cd flask-app-search`
+1. Clone the repository
+    - `git clone https://github.com/radoondas/flask-app-search.git` 
+    - navigate to the repository `cd flask-app-search`
 2. Setup your python Virtual environment (venv). [Doc on venv howto](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments). Or use any IDE of your choice to help you setup Virtual env (venv).
     - Activate venv `source env/bin/activate` or use IDE.
     - Install [requirements](requirements.txt) `pip install -r requirements.txt`
@@ -70,6 +72,10 @@ one key which covers both engines. For the sake of demo, I created additional ac
 APP_SEARCH_API_KEY='search-sm77kdfd3mvtdykg4pfvusiq'
 APP_SEARCH_API_KEY_BLOG='private-7369ct1thtwppsq73s122zip'
 ```
+Note, that if you are using HTTPS endpoint of Elastic SaaS or your own TLS endpoint for App Search, do not use protocol part (`https://`)
+in configuration `APP_SEARCH_BASE_ENDPOINT='localhost:3002/api/as/v1'`. 
+
+Configuration value of `APP_SEARCH_USE_HTTPS=True/False` will pick correct protocol.
 
 ## Run demo
 To tun the application, you simply execute `flask run` command in your venv or use IDE of your choice to execute.
