@@ -1,4 +1,4 @@
-wtforms=2.2.1
+wtforms==2.2.1
 flask==1.1.1
 python-dotenv==0.10.3
 flask-wtf==0.14.2
