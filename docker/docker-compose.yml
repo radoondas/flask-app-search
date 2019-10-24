@@ -2,7 +2,7 @@ version: '2'
 
 services:
   es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.1
     container_name: es-app-search
     environment:
       - node.name=es01
@@ -11,6 +11,7 @@ services:
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
       - path.repo=/usr/share/elasticsearch/snapshots
+      #- "action.auto_create_index=.app-search-*-logs-*,-.app-search-*,+*"
     ulimits:
       memlock:
         soft: -1
@@ -25,7 +26,7 @@ services:
       - esnet
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.3.2
+    image: docker.elastic.co/kibana/kibana:7.4.1
     container_name: kibana-app-search
     environment:
     - ELASTICSEARCH_HOSTS=http://es01:9200
@@ -38,7 +39,7 @@ services:
 
   appsearch:
     container_name: app-search
-    image: docker.elastic.co/app-search/app-search:7.3.2
+    image: docker.elastic.co/app-search/app-search:7.4.1
     environment:
     - "elasticsearch.host=http://es01:9200"
     - "allow_es_settings_modification=true"

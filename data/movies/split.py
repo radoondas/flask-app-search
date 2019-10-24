@@ -1,4 +1,6 @@
 import json
+
+
 with open('movies.json') as infile:
   o = json.load(infile)
   chunkSize = 100
