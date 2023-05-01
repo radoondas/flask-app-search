@@ -1,5 +1,5 @@
 wtforms==2.2.1
-flask==1.1.1
+flask==2.3.2
 python-dotenv==0.10.3
 flask-wtf==0.14.2
 elastic-app-search==7.4.0
