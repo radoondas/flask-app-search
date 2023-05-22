@@ -4,4 +4,4 @@ python-dotenv==0.10.3
 flask-wtf==0.14.2
 elastic-app-search==7.4.0
 elasticsearch-dsl>=7.0.0,<8.0.0
-requests==2.22.0
+requests==2.31.0
